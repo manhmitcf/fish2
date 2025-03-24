@@ -9,10 +9,10 @@ from sklearn.metrics import accuracy_score, f1_score, classification_report
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model = FishClassifier().to(device)
 try:
-    model.load_state_dict(torch.load("models/resnet_model.pth", map_location=device))
+    model.load_state_dict(torch.load("models/fish_classifier.pth", map_location=device))
     model.eval()
 except FileNotFoundError:
-    raise FileNotFoundError("Không tìm thấy file mô hình 'models/resnet_model.pth'.")
+    raise FileNotFoundError("Không tìm thấy file mô hình 'models/fish_classifier.pth'.")
 
 # Load test dataset
 CSV_PATH = "data/val.csv"

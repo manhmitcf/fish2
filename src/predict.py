@@ -10,10 +10,7 @@ model.load_state_dict(torch.load("models/resnet_model.pth"))
 model.eval()
 
 # Map lớp về giá trị score thực tế
-labels_map_reverse = {
-    0: 2.0, 1: 3.5, 2: 4.0, 3: 4.5, 4: 5.0,
-    5: 5.5, 6: 6.0, 7: 7.0, 8: 7.5, 9: 8.0, 10: 9.0
-}
+labels_map_reverse = {0: 2.0, 1: 3.0, 2: 4.0, 3: 5.0, 4: 6.0,5: 7.0, 6: 8.0, 7: 9.0}
 
 # Hàm dự đoán
 def predict(image_path):

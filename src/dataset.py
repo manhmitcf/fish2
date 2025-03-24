@@ -22,14 +22,17 @@ class FishDataset(Dataset):
     
     def __getitem__(self, idx):
         img_name = os.path.join(self.img_dir, self.data.iloc[idx, 0])  # Tên ảnh
+        
         try:
             image = Image.open(img_name).convert("RGB")
         except FileNotFoundError:
             raise FileNotFoundError(f"Không tìm thấy ảnh '{img_name}'.")
 
         # Lấy nhãn và chuyển đổi
-        label = self.data.iloc[idx, 1:].values.astype(int) 
-        label = torch.tensor(label, dtype=torch.float32)
+        label = self.data.iloc[idx, 1]  # Giả sử nhãn nằm ở cột thứ hai
+        label = int(label)  # Chuyển nhãn thành số nguyên
+        label = label - 2  # Chuyển nhãn từ [2, 9] về [0, 7]
+        label = torch.tensor(label, dtype=torch.long)  # Định dạng cho CrossEntropyLoss
         
         if self.transform:
             image = self.transform(image)
@@ -39,8 +42,8 @@ class FishDataset(Dataset):
 # Transform cho ảnh đầu vào
 transform = transforms.Compose([
     transforms.Resize((224, 224)),
-    transforms.RandomHorizontalFlip(),  # Thêm lật ngang ngẫu nhiên
-    transforms.RandomRotation(10),  # Thêm xoay ngẫu nhiên
+    transforms.RandomHorizontalFlip(),  # Lật ngang ngẫu nhiên
+    transforms.RandomRotation(10),  # Xoay ngẫu nhiên
     transforms.ToTensor(),
-    transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+    transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])  # Chuẩn hóa theo ImageNet
 ])

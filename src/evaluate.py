@@ -49,7 +49,7 @@ print(f"F1-score: {f1:.4f}")
 
 # Báo cáo chi tiết từng lớp
 try:
-    class_names = ["3.5", "4.0", "4.5", "5.0", "5.5", "6.0", "7.0", "7.5", "8.0", "9.0", "2.0"]
+    class_names = ["2.0", "3.0", "4.0", "5.0", "6.0", "7.0","8.0", "9.0"]
     if len(set(all_labels)) > len(class_names):
         raise ValueError("Số lượng lớp thực tế lớn hơn số lớp được định nghĩa.")
     class_report = classification_report(all_labels, all_preds, target_names=class_names)

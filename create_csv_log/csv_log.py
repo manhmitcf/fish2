@@ -10,7 +10,7 @@ def compute_z(data):
     lower = x_mean - 1.96 * std / np.sqrt(len(mean))
     if lower - int(lower) > 0.5:
         return np.ceil(lower)
-    elif lower - int(lower) < 0.5:
+    elif lower - int(lower) <= 0.5:
         return np.floor(lower)
     else:
         return lower

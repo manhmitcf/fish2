@@ -21,7 +21,7 @@ IMG_DIR = "data/images/"
 EPOCHS = args.epochs
 BATCH_SIZE = args.batch_size
 LEARNING_RATE = args.lr
-NUM_CLASSES = 11  # 11 lớp cho bài toán phân loại
+NUM_CLASSES = 8
 
 # Load datasets
 train_dataset = FishDataset(TRAIN_CSV_PATH, IMG_DIR, transform=transform)

@@ -3,7 +3,7 @@ import pandas as pd
 
 def split_csv(input_csv, output_dir="data", 
               train_csv="train.csv", val_csv="val.csv", test_csv="test.csv",
-              train_ratio=0.8, val_ratio=0.15, test_ratio=0.05):
+              train_ratio=0.8, val_ratio=0.15, test_ratio=0.05, shuffle=42):
     # Tạo thư mục output nếu chưa có
     os.makedirs(output_dir, exist_ok=True)
 

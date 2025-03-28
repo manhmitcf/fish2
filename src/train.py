@@ -32,8 +32,9 @@ val_dataloader = DataLoader(val_dataset, batch_size=BATCH_SIZE, shuffle=False)
 
 # Load model
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-model = FishClassifier(num_classes=NUM_CLASSES).to(device)  # Đảm bảo model hỗ trợ classification
-
+model = FishClassifier(num_classes=NUM_CLASSES)# Đảm bảo model hỗ trợ classification
+model = nn.DataParallel(model)  # Sử dụng DataParallel nếu có nhiều GPU
+model = model.to(device)
 # Loss và Optimizer
 criterion = nn.CrossEntropyLoss() 
 optimizer = optim.Adam(model.parameters(), lr=LEARNING_RATE)

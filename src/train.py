@@ -33,7 +33,10 @@ val_dataloader = DataLoader(val_dataset, batch_size=BATCH_SIZE, shuffle=False)
 # Load model
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model = FishClassifier(num_classes=NUM_CLASSES)# Đảm bảo model hỗ trợ classification
-model = nn.DataParallel(model)  # Sử dụng DataParallel nếu có nhiều GPU
+try:
+    model = nn.DataParallel(model)  # Sử dụng DataParallel nếu có nhiều GPU
+except Exception as e:
+    print(f"Lỗi khi sử dụng DataParallel: {e}")
 model = model.to(device)
 # Loss và Optimizer
 criterion = nn.CrossEntropyLoss() 
